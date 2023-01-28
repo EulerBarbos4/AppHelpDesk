@@ -1,4 +1,7 @@
 <?php
+   
+   session_start();
+   
    //Verifica se a autenticação foi realizada
    $usuario_autenticado = false;
    //Usuários do sistema
@@ -7,9 +10,7 @@
         array('email'=> 'user@teste.com.br', 'senha' => 'abcd'),
         array('email'=> 'eulerbarbosa96@gmail.com', 'senha' => '123456')
     );
-    /*echo '<pre>';
-    print_r($usuarios_app);
-    echo '<pre>';*/
+   
 
     foreach($usuarios_app as $usuarios){
         if($usuarios['email'] == $_POST['email'] && $usuarios['senha'] == $_POST['senha']){
@@ -19,7 +20,9 @@
 
     if($usuario_autenticado == true){
         echo 'Usuario autenticado <br/>';
+        $_SESSION['autenticado'] = 'sim';
     }else{
+        $_SESSION['autenticado'] = 'nao';
         header('location: index.php?login=erro');
     }
 ?>
