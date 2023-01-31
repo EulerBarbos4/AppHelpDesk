@@ -1,8 +1,8 @@
 <?php
-
+    session_start();
     $arquivo = fopen('arquivo.hd','a');
 
-    $texto = implode('#',str_replace('#','-',$_POST)) . PHP_EOL;
+    $texto =$_SESSION['id'] .'#'. implode('#',str_replace('#','-',$_POST)) . PHP_EOL;
 
     fwrite($arquivo,$texto);
     
