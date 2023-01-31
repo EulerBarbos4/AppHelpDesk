@@ -12,8 +12,17 @@
   //enquanto houver registros (linhas) a serem recuperados
   while(!feof($arquivo)){//testa pelo fim de um arquivo
     $registro = fgets($arquivo);
-    $chamados[] = $registro;
+    $chamado_dados = explode('#',$registro);
+    if($_SESSION['perfil_id'] == 2){
+      if($_SESSION['id']== $chamado_dados[0]){
+        $chamados[] = $registro;
+      }
+    }else {
+      $chamados[] = $registro;
+    } 
   }
+
+  
 
   //fecha o arquivo aberto
   fclose($arquivo);
@@ -63,11 +72,11 @@
               <?php 
                 foreach($chamados as $chamado){
                   $chamado_dados = explode('#',$chamado);
-                  if($_SESSION['perfil_id'] == 2){
+                  /*if($_SESSION['perfil_id'] == 2){
                     if($_SESSION['id']!= $chamado_dados[0]){
                       continue;
                     }
-                  }
+                  }*/
                   if(count($chamado_dados)<3){
                     continue;
                   }
